@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import {
-  StyleSheet,
+import { 
+  View, 
   Text,
-  View,
-  TouchableOpacity,
-} from 'react-native'
+  TouchableOpacity, 
+  StyleSheet 
+} from "react-native";
 
 import {
   GAME_RESULT_NO,

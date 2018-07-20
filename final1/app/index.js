@@ -11,5 +11,4 @@ class ReactNativeTicTacToe extends Component {
   }
 }
 
-AppRegistry.registerComponent('ReactNativeTicTacToe', () => ReactNativeTicTacToe)
-
+AppRegistry.registerComponent('App', () => ReactNativeTicTacToe)
