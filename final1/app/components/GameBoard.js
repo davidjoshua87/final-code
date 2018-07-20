@@ -141,7 +141,7 @@ export default class GameBoard extends Component {
                 width: 306,
                 height: 3,
                 transform: [
-                  {translateY: 100}
+                  {translateY: 200}
                 ]
               }]}
             />
