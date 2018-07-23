@@ -1,7 +1,15 @@
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ * @flow
+ */
+
 import React, { Component } from 'react'
 import {
   TouchableWithoutFeedback,
-  View
+  View,
+  Text,
+  TouchableOpacity
 } from 'react-native'
 
 import Circle from './Circle'
@@ -13,17 +21,18 @@ import {
   GAME_RESULT_NO,
   GAME_RESULT_USER,
   GAME_RESULT_AI,
-  GAME_RESULT_TIE
+  GAME_RESULT_DRAW
 } from '../constants/game'
 import styles from './styles/gameBoard'
-import PromptArea from './PromptArea'
+import Result from './Result'
 
 export default class GameBoard extends Component {
   state: {
     AIInputs: number[],
     userInputs: number[],
     result: number,
-    round: number
+    round: number,
+    gameResult: boolean
   };
 
   constructor() {
@@ -32,8 +41,14 @@ export default class GameBoard extends Component {
       AIInputs: [],
       userInputs: [],
       result: GAME_RESULT_NO,
-      round: 0
+      round: 0,
+      gameResult: false
     }
+  }
+
+  resultGame() {
+    this.setState({ gameResult: true })
+
   }
 
   restart() {
@@ -48,7 +63,7 @@ export default class GameBoard extends Component {
       if (round % 2 === 0) {
         this.AIAction()
       }
-    }, 5)
+    }, 10)
   }
 
   boardClickHandler(e: Object) {
@@ -79,7 +94,6 @@ export default class GameBoard extends Component {
     }
     while(true) {
       const inputs = userInputs.concat(AIInputs)
-
       const randomNumber = Math.round(Math.random() * 8.3)
       if (inputs.every(d => d !== randomNumber)) {
         this.setState({ AIInputs: AIInputs.concat(randomNumber) })
@@ -113,16 +127,18 @@ export default class GameBoard extends Component {
     }
 
     if (inputs.length === 9 &&
-        result === GAME_RESULT_NO && result !== GAME_RESULT_TIE) {
-      this.setState({ result: GAME_RESULT_TIE })
+        result === GAME_RESULT_NO && result !== GAME_RESULT_DRAW) {
+      this.setState({ result: GAME_RESULT_DRAW })
     }
   }
 
   render() {
-    const { userInputs, AIInputs, result } = this.state
+    const { userInputs, AIInputs, result, gameResult } = this.state
     return (
-      <View style={styles.container}>
-        <TouchableWithoutFeedback onPress={e => this.boardClickHandler(e)}>
+        <View style={styles.container}>
+        {
+          result === -1 ? (
+            <TouchableWithoutFeedback onPress={e => this.boardClickHandler(e)}>
           <View style={styles.board}>
             <View
               style={styles.line}
@@ -141,7 +157,7 @@ export default class GameBoard extends Component {
                 width: 306,
                 height: 3,
                 transform: [
-                  {translateY: 200}
+                  {translateY: 100}
                 ]
               }]}
             />
@@ -175,7 +191,22 @@ export default class GameBoard extends Component {
             }
           </View>
         </TouchableWithoutFeedback>
-        <PromptArea result={result} onRestart={() => this.restart()} />
+          ) : (
+            <View>
+              {
+                gameResult ? (
+                  <TouchableOpacity onPress={() => this.resultGame()}>
+                    <Text style={styles.instructions}>
+                      Touch here to result
+                    </Text>
+                  </TouchableOpacity>
+                ): (
+                  <Result result={ result } onRestart={() => this.restart()}/>
+                )
+              }
+            </View>
+          )
+        }
       </View>
     )
   }

@@ -1,28 +1,34 @@
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ * @flow
+ */
+
 import React, { Component } from 'react'
-import { 
-  View, 
+import {
+  StyleSheet,
   Text,
-  TouchableOpacity, 
-  StyleSheet 
-} from "react-native";
+  View,
+  TouchableOpacity,
+} from 'react-native'
 
 import {
   GAME_RESULT_NO,
   GAME_RESULT_USER,
   GAME_RESULT_AI,
-  GAME_RESULT_TIE
+  GAME_RESULT_DRAW
 } from '../constants/game'
 
+export default class Result extends Component {
 
-export default class Header extends Component {
   generateResultText(result: number) {
     switch (result) {
       case GAME_RESULT_USER:
-        return 'You won the game!'
+        return 'You Won 😎'
       case GAME_RESULT_AI:
-        return 'AI won the game!'
-      case GAME_RESULT_TIE:
-        return 'Tie!'
+        return 'You Lose 😔'
+      case GAME_RESULT_DRAW:
+        return 'Game Draw 😤'
       default:
         return ''
     }
@@ -32,11 +38,11 @@ export default class Header extends Component {
     const { result, onRestart } = this.props
     return (
       <View>
-        <Text style={styles.text}>{ this.generateResultText(result) }</Text>
+        <Text style={ styles.text }>{ this.generateResultText(result) }</Text>
         {
           result !== GAME_RESULT_NO && (
-            <TouchableOpacity onPress={() => onRestart()}>
-              <Text style={styles.instructions}>
+            <TouchableOpacity onPress={ () => onRestart() }>
+              <Text style={ styles.instructions }>
                 Touch here to play again
               </Text>
             </TouchableOpacity>
@@ -49,18 +55,17 @@ export default class Header extends Component {
 
 const styles = StyleSheet.create({
   text: {
-    marginTop: 20,
-    fontSize: 19,
+    marginTop: 28,
+    marginBottom: 10,
+    fontSize: 21,
     fontWeight: 'bold',
+    color: 'blue',
     textAlign: 'center'
   },
   instructions: {
-    marginTop: 20,
+    marginTop: 30,
     color: 'grey',
     marginBottom: 5,
     textAlign: 'center'
   },
 })
-
-
-

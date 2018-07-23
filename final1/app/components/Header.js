@@ -1,3 +1,9 @@
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ * @flow
+ */
+
 import React, { Component } from 'react'
 import {
   StyleSheet,
@@ -20,7 +26,7 @@ export default class Header extends Component {
 const styles = StyleSheet.create({
   container: {
     marginTop: 20,
-    backgroundColor: 'skyblue',
+    backgroundColor: 'red',
     flexDirection: 'row'
   },
   title: {

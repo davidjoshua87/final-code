@@ -36,4 +36,4 @@ export const CONDITIONS = [
 export const GAME_RESULT_NO = -1
 export const GAME_RESULT_USER= 0
 export const GAME_RESULT_AI =  1
-export const GAME_RESULT_TIE = 2
+export const GAME_RESULT_DRAW = 2

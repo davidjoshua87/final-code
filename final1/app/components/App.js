@@ -1,3 +1,9 @@
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ * @flow
+ */
+
 import React, { Component } from 'react'
 import {
   StyleSheet,
@@ -10,14 +16,14 @@ import Header from './Header'
 import GameBoard from './GameBoard'
 
 export default class App extends Component {
+  constructor() {
+    super()
+    this.state = { gameStarted: false }
+  }
+
   state: {
     gameStarted: boolean
   };
-
-  constructor() {
-    super()
-    this.state={ gameStarted: false }
-  }
 
   startGame() {
     this.setState({ gameStarted: true })
@@ -57,12 +63,14 @@ const styles = StyleSheet.create({
   },
   welcome: {
     fontSize: 20,
-    marginTop: 50,
+    marginTop: 100,
+    fontWeight: 'bold',
+    color: 'black',
   },
   instructions: {
     textAlign: 'center',
-    marginTop: 20,
-    color: 'grey',
+    marginTop: 23,
+    color: 'green',
     marginBottom: 5,
-  }
+  },
 })
